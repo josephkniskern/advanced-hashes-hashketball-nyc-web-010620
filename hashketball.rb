@@ -1,3 +1,5 @@
+require 'pry'
+
 def game_hash
   {
     :home => {
@@ -58,7 +60,7 @@ def game_hash
     },
     :away => {
       :team_name => "Charlotte Hornets",
-      :colors => ["Turquiose", "Purple"],
+      :colors => ["Turquoise", "Purple"],
       :players => [
         {:player_name => "Jeff Adrien",
          :number => 4,
@@ -70,7 +72,7 @@ def game_hash
          :blocks => 7,
          :slam_dunks => 2
        },
-       {:player_name = "Bismack Biyombo",
+       {:player_name => "Bismack Biyombo",
         :number => 0,
         :shoe => 16,
         :points => 12,
@@ -80,17 +82,17 @@ def game_hash
         :blocks => 15,
         :slam_dunks => 10
       },
-      {:player_name => "DeSanga Diop",
+      {:player_name => "DeSagna Diop",
        :number => 2,
        :shoe => 14,
-       :points => 22,
+       :points => 24,
        :rebounds => 12,
        :assists => 12,
        :steals => 4,
        :blocks => 5,
        :slam_dunks => 5
      },
-     {:player_name = "Ben Gordon",
+     {:player_name => "Ben Gordon",
       :number => 8,
       :shoe => 15,
       :points => 33,
@@ -100,7 +102,7 @@ def game_hash
       :blocks => 1,
       :slam_dunks => 0
     },
-    {:player_name = "Kemba Walker",
+    {:player_name => "Kemba Walker",
      :number => 33,
      :shoe => 15,
      :points => 6,
@@ -113,3 +115,51 @@ def game_hash
       ]
     }
   }
+
+end
+
+def num_points_scored(players_name)
+  game_hash.each do |place, team|
+    team.each do |team_info, data|
+      if team_info == :players
+        data.each do |player|
+          if player[:player_name] == players_name
+            #binding.pry
+            return player[:points]
+          end
+        end
+      end
+    end
+  end
+end
+
+
+def shoe_size(players_name)
+  game_hash.each do |place, team|
+    team.each do |team_info, data|
+      if team_info == :players
+        data.each do |player|
+          if player[:player_name] == players_name
+            #binding.pry
+            return player[:shoe]
+          end
+        end
+      end
+    end
+  end
+end
+
+
+def team_colors(team_name)
+  game_hash.each do |place, team|
+    if team_name == team[:team_name]
+      return team[:colors]
+    end
+  end
+end
+
+def team_names
+  game_hash.map do |place, team|
+    team[:team_name]
+  end
+end
