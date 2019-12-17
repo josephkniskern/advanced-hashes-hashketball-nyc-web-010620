@@ -163,3 +163,41 @@ def team_names
     team[:team_name]
   end
 end
+
+
+def player_numbers(team_name)
+  game_hash.each do |place, team|
+    if team[:team_name] == team_name
+      team.each do |team_info, data|
+        if team_info == :players
+          return data.map { |players| players[:number]}
+        end
+      end
+    end
+  end
+end
+
+
+def player_stats(players_name)
+  new_hash = {}
+  game_hash.each do |place, team|
+    team.each do |team_info, data|
+      if team_info == :players
+        data.each do |player|
+          if player[:player_name] == players_name
+            new_hash = player.delete_if do |k, v|
+              k == :player_name
+            end
+          end
+        end
+      end
+    end
+  end
+  new_hash
+end
+
+def big_shoe_rebounds
+  big_shoe = 0
+  rebounds = 0
+
+end
